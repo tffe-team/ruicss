@@ -27,7 +27,7 @@ $ npm install ruicss --save-dev
  */
 
 // base
-$_base: (
+$base: (
     responsive-type:        normal,
     font-size-root:         100px,
     // 适配：用于做元素随屏幕大小而变化的情况
@@ -38,7 +38,7 @@ $_base: (
     // font-family
     font-family:          #{"Helvetica Neue", Helvetica, STHeiTi, sans-serif},
     //font-path
-    font-path:            "./font/", //"../sass/font/",
+    font-path:            "~ruicss/sass/font/",
     // lin-height
     line-height:          1.5,
     // 默认文档背景色

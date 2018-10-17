@@ -1,0 +1,10 @@
+@charset "utf-8";
+@import "base";
+
+$foo: global-variable-exists(base);
+
+@if ($foo) { 
+    $base: map-merge($_base, $base) !global;
+} @else {
+    $base: $_base !global;
+}

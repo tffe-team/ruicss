@@ -1,8 +1,8 @@
 {
   "name": "ruicss",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "fe framework for rong360 fe team",
-  "main": "server.js",
+  "main": "./sass/index.scss",
   "scripts": {
     "start": "DEBUG=express:* node server.js",
     "build": "webpack --config ./build/webpack.pro.js -p"

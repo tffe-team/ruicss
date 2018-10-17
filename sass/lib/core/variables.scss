@@ -52,7 +52,7 @@ $ico: (
     is-use: true,
     font-name: ruifont,
     // font-path: "common/css/rui/sass/font/"
-    font-path: "../sass/font/"
+    font-path: map-get($base, font-path)
 );
 // z-index
 $z-index: (

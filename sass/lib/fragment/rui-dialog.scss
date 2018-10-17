@@ -1,0 +1,177 @@
+@charset "UTF-8";
+@import "./rui-masker";
+@mixin _dialog{
+   @include flexbox;
+   @include flex-direction(column);
+   overflow: hidden;
+   padding-top: .15rem;
+   min-width: 2.5rem;
+   max-width: 72%;
+   width: map-get($dialog, width);
+   height: map-get($dialog, height);
+   margin: auto;
+   border-radius: map-get($dialog, radius);
+   background-color: #fff;
+   text-align: center;
+   >.hd {
+     .title {
+       overflow: hidden;
+       color: map-get($dialog, title-color);
+       font-size: map-get($dialog, title-font-size);
+       line-height: .16rem;
+       padding-bottom: .15rem;
+     }
+     @include border(
+        $border-width: map-get($dialog, title-border-width),
+        $border-color: #e5e5e5
+    );
+   }
+   >.bd {
+     @include overflow;
+     min-height: .4rem;
+     padding: map-get($dialog, bd-padding);
+     font-size: map-get($dialog, bd-font-size);
+     color: map-get($dialog, bd-color);
+   }
+   > .ft {
+           @include flexbox;
+           text-align: center;
+           @include rui-btn(
+               $name: dialog,
+               $height: .4rem,
+               $border-width: 0,
+               $border-color: map-get($dialog, border-color),
+               $bgcolor: #f2f2f8,
+               $active-color: #e9e9f4,
+               $color: map-get($base, link-color),
+               $radius: 0,
+               $font-size: .16rem
+           ){
+               display: block;
+               line-height: 1;
+               @include flex;
+               &:last-child {
+                   // font-weight: bold;
+                   &::after {
+                       border-right-width: 0;
+                   }
+                   border-bottom-right-radius: map-get($dialog, radius);
+               }
+               &:first-child {
+                   border-bottom-left-radius: map-get($dialog, radius);
+               }
+           }
+    }
+}
+@mixin rui-dialog(
+    $name: default,
+    $width: default,
+    $height: default,
+    $radius: default,
+    $border-color: default,
+    $title-color: default,
+    $title-font-size: default,
+    $bd-padding: default,
+    $bd-font-size: default,
+    $bd-color: default) {
+    // 区别是否新增实例还是修改本身
+    $name: if($name == default, "", "-#{$name}");
+    // 如果值为default，则取config的定义
+    @if $width == default {
+        $width: map-get($dialog, width);
+    }
+    @if $height == default {
+        $height: map-get($dialog, height);
+    }
+    @if $radius == default {
+        $radius: map-get($dialog, radius);
+    }
+    @if $border-color == default {
+        $border-color: map-get($dialog, border-color);
+    }
+    @if $title-color == default {
+        $title-color: map-get($dialog, title-color);
+    }
+    @if $title-font-size == default {
+        $title-font-size: map-get($dialog, title-font-size);
+    }
+    @if $bd-padding == default {
+        $bd-padding: map-get($dialog, bd-padding);
+    }
+    @if $bd-font-size == default {
+        $bd-font-size: map-get($dialog, bd-font-size);
+    }
+    .rui-dialog#{$name} {
+        @if $radius != map-get($dialog, radius) {
+            border-radius: $radius;
+        }
+        &::after {
+            // 如果$border-color不等于config设定，则重绘边框颜色
+            @if $border-color != map-get($dialog, border-color) {
+                border-color: $border-color;
+            }
+            // 如果$radius不等于config设定，则重绘边框圆角
+            @if $radius != map-get($dialog, radius) {
+                @include responsive(retina1x) {
+                    border-radius: $radius;
+                }
+                @include responsive(retina2x) {
+                    border-radius: $radius * 2;
+                }
+                @include responsive(retina3x) {
+                    border-radius: $radius * 3;
+                }
+            }
+        }
+        @if $width != map-get($dialog, width) {
+            width: $width;
+        }
+        @if $height != map-get($dialog, height) {
+            height: $height;
+        }
+        > .hd {
+            .title {
+                @if $title-color != map-get($dialog, title-color) {
+                    color: $title-color;
+                }
+                @if $title-font-size != map-get($dialog, title-font-size) {
+                    font-size: $title-font-size;
+                }
+            }
+        }
+        > .bd {
+            @if $bd-padding != map-get($dialog, bd-padding) {
+                padding: $bd-padding;
+            }
+            @if $bd-font-size != map-get($dialog, bd-font-size) {
+                font-size: $bd-font-size;
+            }
+            @if $bd-color != map-get($dialog, bd-color) {
+                color: $bd-color;
+            }
+        }
+        > .ft {
+            .rui-btn-dialog {
+                @if $radius != map-get($dialog, radius) {
+                    &:last-child {
+                        border-bottom-right-radius: $radius;
+                    }
+                    &:first-child {
+                        border-bottom-left-radius: $radius;
+                    }
+                }
+                &::after {
+                    // 如果$border-color不等于config设定，则重绘边框颜色
+                    @if $border-color != map-get($dialog, border-color) {
+                        border-color: $border-color;
+                    }
+                }
+            }
+        }
+        // 增量扩展
+        @content;
+    }
+}
+.rui-dialog{
+  @include _dialog;
+}

@@ -1,0 +1,62 @@
+// @charset "utf-8";
+// @import "../core/reset";
+@mixin _badge{
+    min-height: .16rem;
+    min-width: .16rem;
+    font-size: map-get($badge, font-size);
+    color: map-get($badge, color);
+    background-color: map-get($badge, bgcolor);
+    padding: map-get($badge, padding);
+    line-height: 1;
+    border: map-get($badge, border-width) solid map-get($badge, border-color); 
+    border-radius: map-get($badge, radius);
+    @include align($flexbox: inline-flex);
+}
+@mixin rui-badge(
+    $name: default,
+    $border-width: default,
+    $border-color: default,
+    $radius: default,
+    $color: default,
+    $bgcolor: default,
+    $padding: default,
+    $font-size: default
+    ) {
+    $name : if($name == default, "" , "-#{$name}");
+    .rui-badge#{$name} {
+        @if $padding != default {
+            padding: $padding;
+        }
+        @if $bgcolor != default {
+            background-color: $bgcolor;
+        }
+        @if $font-size != default {
+            font-size: $font-size;
+        }
+        @if $color != default {
+            color: $color;
+        }
+        @if $border-width != default {
+            border-width: $border-width;
+        }
+        @if $border-color != default {
+            border-color: $border-color;
+        }
+        // todo
+        @if $radius != default {
+            @include responsive(retina1x) {
+                border-radius: $radius;
+            }
+            @include responsive(retina2x) {
+                border-radius: $radius * 2;
+            }
+            @include responsive(retina3x) {
+                border-radius: $radius * 3;
+            }
+        } 
+        @content;
+    }
+}
+.rui-badge{
+    @include _badge;
+}

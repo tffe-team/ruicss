@@ -1,0 +1,35 @@
+@import "../../lib/element/rui-checked";
+@include rui-checked(
+    $name: "a",
+    $on-color: #407fd3
+);
+@include rui-checked(
+    $name: "b",
+    $border-width : 1px,
+    $border-color : #ddd,
+    $bgcolor: #fff,
+    $color: #ddd,
+    $on-border-color : #407fd3,
+    $on-color: #407fd3
+);
+@include rui-checked(
+    $name: "c",
+    $border-width : 1px,
+    $border-color : #ddd,
+    $bgcolor: #fff,
+    $color: #ddd,
+    $on-border-color : #407fd3,
+    $on-bgcolor: #407fd3,
+    $on-color: #fff
+);
+@include rui-checked(
+    $name: "d",
+    $border-width : 1px,
+    $border-color : #ddd,
+    $bgcolor: #fff,
+    $color: #ddd,
+    $on-border-color : #407fd3,
+    $on-bgcolor: #407fd3,
+    $on-color: #fff,
+    $radius: 50%
+);

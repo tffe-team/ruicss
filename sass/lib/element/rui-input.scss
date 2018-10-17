@@ -1,0 +1,76 @@
+// @charset "utf-8";
+// @import "../core/reset";
+// 定义默认input
+@mixin _input {
+    border: 1px solid map-get($base, border-color);
+    border-radius: map-get($input, radius);
+    width: map-get($input, width);
+    height: map-get($input, height);
+    line-height: map-get($input, height);
+    padding: map-get($input, padding);
+    background-color: map-get($input, bgcolor);
+    color: map-get($base, color);
+    vertical-align: top;
+    &::-webkit-input-placeholder {
+        color: map-get($input, placeholder-color);
+    }
+}
+@mixin rui-input(
+    $name : default,
+    $border-color : default,
+    $border-width: default,
+    $radius: default,
+    $padding : default,
+    $width: default,
+    $height : default,
+    $font-size: default,
+    $bgcolor:  default,
+    $color: default,
+    $placeholder-color: default) {
+    $name: if($name == default, "", "-#{$name}");
+    .rui-input#{$name} {
+        @if $border-color != default {
+            border:1px solid $border-color;
+        }
+        @if $border-width != default {
+            border-width: $border-width;
+        }
+        @if $radius != default {
+            border-radius: $radius; //
+        }
+        @if $width != default {
+            width: $width;
+        }
+        @if $height != default {
+            height: $height;
+            line-height: $height;
+        }
+        @if $padding != default {
+            padding: $padding;
+        }
+        @if $bgcolor != default {
+            background-color: $bgcolor;
+        }
+        @if $color != default {
+            color: $color;
+        }
+        @if $placeholder-color != default {
+            &::-webkit-input-placeholder {
+                color: $placeholder-color;
+            }
+        }
+        &:disabled {
+            @if $bgcolor !=  null{
+                background-color: lighten($bgcolor, 20%);
+            }
+            @if $color !=  null{
+                border-color: lighten($color, 50%);
+            }
+        }
+        // 增量扩展
+        @content;
+    }
+}
+.rui-input{
+    @include _input;
+}

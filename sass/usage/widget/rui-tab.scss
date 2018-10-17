@@ -1,0 +1,18 @@
+@charset "utf-8";
+@import "../../lib/widget/rui-tab";
+@include rui-tab(
+    $name : "radius",
+    $width: 95%,
+    $padding: 0,
+    $border-width: 1px,
+    $radius: 5px,
+    $bgcolor: #fff,
+    $border-color: #ddd,
+    $on-border-width: 0,
+    $on-border-color: null,
+    $on-bgcolor: #008ae0,
+    $on-color: #fff
+){
+    margin: 5px;
+    overflow: hidden;
+};

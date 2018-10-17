@@ -1,0 +1,30 @@
+@charset "utf-8";
+@mixin _flex{
+    height: 100%;
+    @include flexbox;
+    @include flex-direction(map-get($flex, direction));
+    overflow: hidden;
+    > .flex {
+        @include flex(1, map-get($flex, direction));
+        @include overflow;
+        position: relative;
+    }
+}
+@mixin rui-flex(
+    $name : default,
+    $direction : default
+){
+    $name : if($name == default, "" , "-#{$name}");
+    .rui-flex#{$name} {
+        @if $direction != default {
+            @include flex-direction($direction);
+        }
+        > .flex{
+            @include flex(1, $direction);
+        }
+    }
+    @content;
+}
+.rui-flex{
+    @include _flex;
+}

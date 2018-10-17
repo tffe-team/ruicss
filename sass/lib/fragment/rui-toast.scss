@@ -1,0 +1,58 @@
+@charset "utf-8";
+@mixin _toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  @include transform(translate(-50%, -50%));
+  min-width: 2rem;
+  max-width: 72%;
+  z-index: map-get($z-index, toast);
+  padding: map-get($toast, padding);
+  border-radius: map-get($toast, radius);
+  background-color: map-get($toast, bgcolor);
+  color: map-get($toast, color);
+  text-align: center;
+}
+
+@mixin rui-toast (
+  $name: default,
+  $padding: default,
+  $radius: default,
+  $bgcolor: default,
+  $color: default ) {
+    // 区别是否新增实例还是修改本身
+    $name: if($name == default, "", "-#{$name}");
+    // 如果值为default，则取config的定义
+    @if $padding == default {
+        $padding: map-get($toast, padding);
+    }
+    @if $radius == default {
+        $radius: map-get($toast, radius);
+    }
+    @if $bgcolor == default {
+        $bgcolor: map-get($toast, bgcolor);
+    }
+    @if $color == default {
+        $color: map-get($toast, color);
+    }
+    .rui-toast#{$name} {
+        @if $padding != map-get($toast, padding) {
+            padding: $padding;
+        }
+        @if $radius != map-get($toast, radius) {
+            border-radius: $radius;
+        }
+        @if $bgcolor != map-get($toast, bgcolor) {
+            background-color: $bgcolor;
+        }
+        @if $color != map-get($toast, color) {
+            color: $color;
+        }
+
+        // 增量扩展
+        @content;
+    }
+  }
+.rui-toast{
+  @include _toast;
+}

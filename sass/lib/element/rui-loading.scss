@@ -1,0 +1,77 @@
+// @charset "utf-8";
+// @import "../core/reset";
+@import "../ani/rotate";
+// 定义loadding基础样式
+@mixin _loading{
+    @include align;
+    @include full-screen(map-get($z-index, loading));
+    background-color: map-get($loading, masker-bgcolor);;
+    line-height: 1; // 等于字体大小
+    > .inner{
+        display: block;
+        text-align: center;
+        padding: map-get($loading, padding);
+        border-radius: map-get($loading, radius);
+        background-color: map-get($loading, bgcolor);
+        color: map-get($loading, color);
+        font-size: map-get($loading, font-size);
+        >.rui-ico{
+            display: block;
+            @include animation(rotate 1.5s infinite linear);
+            @include transform-origin(center);
+            &::before{
+                font-family: map-get($ico, font-name);
+                font-size: map-get($loading, ico-size);
+                color: map-get($loading, ico-color);
+                content: map-get($loading, content);
+            }
+        }
+    }
+}
+
+@mixin rui-loading(
+    $name: default,
+    $ico-color: default,
+    $ico-size: default,
+    $content: default,
+    $font-size: default,
+    $color: default,
+    $bgcolor: default,
+    $mask-bgcolor: default
+    ){
+        $name : if($name == default, "", "-#{$name}");
+
+        .rui-loading#{$name}{
+            @if($mask-bgcolor != default) {
+                background-color : $mask-bgcolor;
+            }
+            >.inner{
+                @if $color != default{
+                    color : $color;
+                }
+                @if $font-size != default{
+                    font-size : $font-size;
+                }
+                @if $bgcolor != default{
+                    background-color : $bgcolor;
+                }
+                .rui-ico{
+                    &::before {
+                        @if $ico-color != default {
+                            color : $ico-color;
+                        }
+                        @if $ico-size != default {
+                            font-size : $ico-size;
+                        }
+                        @if $content != default {
+                            content : content;
+                        }
+                    }
+                }
+            }
+            @content;
+        }
+    }
+.rui-loading{
+    @include _loading;
+}

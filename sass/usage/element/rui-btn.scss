@@ -1,0 +1,34 @@
+@import "../../lib/element/rui-btn";
+@include rui-btn(
+    $name: "search",
+    $border-width: 0,
+    $border-color: #fd8007,
+    $bgcolor: #fd8007,
+    $active-bgcolor : #e37307,
+    $active-border-color: #e37307
+);
+@include rui-btn(
+    $name: "login",
+    $border-width: 1px,
+    $bgcolor: #35d7a0,
+    $border-color: #35d7a0,
+    $active-bgcolor : #2dbe8d,
+    $active-border-color: #2dbe8d
+);
+@include rui-btn(
+    $name: "weak",
+    $border-width: 1px,
+    $bgcolor: #fff,
+    $border-color:#ddd,
+    $active-bgcolor : #bbb,
+    $active-border-color: #bbb,
+    $color: #4b4b4b
+);
+@include rui-btn(
+    $name: "bank",
+    $border-width: 1px,
+    $bgcolor: #6eaedb,
+    $border-color:#6eaedb,
+    $active-bgcolor : #629bc3,
+    $active-border-color: #629bc3
+);

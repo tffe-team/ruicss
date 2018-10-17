@@ -1,0 +1,17 @@
+@import "../../lib/element/rui-loading";
+
+@include rui-loading(
+    $name : "test2",
+    $bgcolor: #bbb,
+    $ico-color: #fff
+){
+    position: static;
+};
+
+@include rui-loading(
+    $name : "test3",
+    $ico-color: #5c99ea,
+    $color: #404040
+){
+    position: static;
+};

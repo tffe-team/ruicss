@@ -1,0 +1,35 @@
+// @charset "utf-8";
+@import "../../lib/fragment/rui-list";
+  // $name : default,
+  //   $bgcolor :  default,
+  //   $radius: default,
+  //   $color : default,
+  //   $font-size: default,
+  //   $margin: default,
+  //   $border-width: default,
+  //   $border-color: default,
+  //   $item-padding : default,
+  //   $item-border-width : default,
+  //   $item-bgcolor: default,
+  //   $active-bgcolor: default,
+  //   $label-padding: default,
+  //   $label-font-size : default,
+  //   $label-bgcolor : default,
+  //   $has-last-border : default
+@include rui-list(
+    $name : "loan",
+    $bgcolor: #fff,
+    $font-size: .14rem,
+    $has-last-border : false,
+    $border-color: #c7c8cc,
+    $color: #666,
+    $item-padding : .05rem,
+    $item-border-width: 0 0 1px,
+    $active-bgcolor: #eee,
+    $label-padding: 0 .05rem
+){
+    .checked{
+        color: #5c99ea;
+        font-size: .22rem
+    }
+};

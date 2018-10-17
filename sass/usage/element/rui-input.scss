@@ -1,0 +1,10 @@
+@import "../../lib/element/rui-input";
+@include rui-input(
+    $name: "spc",
+    $width: 3rem,
+    $padding : 0 .05rem,
+    $color: #6c6c6c,
+    $bgcolor: #fff,
+    $placeholder-color: #cbcbcb,
+    $radius: .05rem 
+);

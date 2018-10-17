@@ -1,0 +1,136 @@
+@charset "utf-8";
+// @import "../core/reset";
+@mixin _list{
+    margin: map-get($list, margin);
+    background-color:  map-get($list,bgcolor);
+    color: map-get($base, color);
+    font-size: map-get($base, font-size);
+    @include border(
+        $border-width: map-get($list, border-width),
+        $border-color: map-get($base, border-color),
+        $radius: map-get($list, radius)
+    );
+
+    >.item {
+        @include flexbox;
+        @include align-items;
+        padding: map-get($list, item-padding);
+        @include border(
+            $border-width: map-get($list, item-border-width),
+            $border-color: map-get($base, border-color)
+        );
+        &:active {
+            background-color: map-get($list, active-bgcolor);
+        }
+        &:last-child {
+            margin-bottom: -1px;
+            &::after {
+                border-color: map-get($list, border-color);
+                @if map-get($list, has-last-border) != true {
+                    border-width: 0;
+                }
+            }
+        }
+        >.flex{
+            @include flex;
+        }
+        >.label {
+            padding: map-get($list, label-padding);
+            font-size: map-get($list, label-font-size);
+            background-color: map-get($list, label-bgcolor);
+        }
+    }
+};
+
+@mixin rui-list(
+    $name : default,
+    $bgcolor :  default,
+    $radius: default,
+    $color : default,
+    $font-size: default,
+    $margin: default,
+    $border-width: default,
+    $border-color: default,
+    $item-padding : default,
+    $item-border-width : default,
+    $item-bgcolor: default,
+    $active-bgcolor: default,
+    $label-padding: default,
+    $label-font-size : default,
+    $label-bgcolor : default,
+    $has-last-border : default
+){
+    $name: if($name == default, "", "-#{$name}");
+    .rui-list#{$name} {
+        @if $color != default {
+            color: $color;
+        }
+        @if $bgcolor != default {
+            background-color: $bgcolor;
+        }
+        @if $font-size != default {
+            font-size: $font-size;
+        }
+        @if $border-width != default {
+            border-width : $border-width;
+        }
+        @if $border-color != default {
+            border-color: $border-color;
+        }
+        @if $radius != default {
+            border-radius: $radius;
+            overflow: hidden;
+        }
+        >.item{
+            @if $item-padding != default {
+                padding: $item-padding;
+            }
+            @if $item-bgcolor != default {
+                background-color: $item-bgcolor;
+            }
+            @if $item-border-width != default {
+                $item-border-width: $item-border-width;
+            }
+            @if $border-color != default {
+                $border-color: $border-color;
+            } @else {
+                $border-color: map-get($base, border-color)
+            }
+            @include border(
+                $border-width: $item-border-width,
+                $border-color: $border-color
+            );
+            &:active{
+                @if $active-bgcolor != default {
+                    background-color: $active-bgcolor;
+                }
+            }
+            &:last-child {
+                // margin-bottom: -1px;
+                &::after {
+                    @if $border-color != default {
+                        border-color: $border-color;
+                    }
+                    @if $has-last-border != true {
+                        border-width: 0;
+                    }
+                }
+            }
+            >.label {
+                @if $label-padding != default {
+                    padding: $label-padding;
+                }
+                @if $label-font-size != default {
+                    font-size: $label-font-size;
+                }
+                @if $label-bgcolor != default {
+                    background-color: $label-bgcolor;
+                }
+            }
+        }
+        @content;
+    }
+}
+.rui-list{
+    @include _list;
+}

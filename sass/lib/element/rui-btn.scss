@@ -1,0 +1,167 @@
+// @charset "utf-8";
+// @import "../core/reset";
+// 定义btn基础样式
+@mixin _btn{
+    display: inline-block;
+    width: map-get($btn, width);
+    height: map-get($btn, height);
+    line-height: map-get($btn, height);
+    padding: map-get($btn, padding);
+    vertical-align: top;
+    @include border(
+        $border-width: map-get($btn, border-width),
+        $border-color: map-get($btn, border-color),
+        $radius: map-get($btn, radius)
+    );
+    //button 元素清楚默认边框
+    border: 0 none;
+    background-color: map-get($btn, bgcolor);
+    color: map-get($btn, color);
+    font-size: map-get($btn, font-size);
+    text-align: center;
+    cursor: pointer;
+    &:active {
+        &::after {
+            border-color: map-get($btn, active-border-color);
+        }
+        background-color: map-get($btn, active-bgcolor);
+        color: map-get($btn, active-color);
+    }
+    &-disabled {
+        opacity: 1;
+        cursor: not-allowed;
+        &,
+        &:active {
+            &::after {
+                border-color: lighten(map-get($btn, border-color), 15%);
+            }
+            background-color: lighten(map-get($btn, bgcolor), 20%);
+            color: lighten(map-get($btn, color), 40%);
+        }
+
+    }
+};
+// 扩展样式
+@mixin rui-btn(
+    $name: default,
+    $border-width: default,
+    $border-color: default,
+    $bgcolor: default,
+    $color: default,
+    $active-border-color: default,
+    $active-bgcolor: default,
+    $active-color: default,
+    $padding: default,
+    $radius: default,
+    $font-size: default,
+    $width: default,
+    $height: default){
+
+    $name: if($name == default, "", "-#{$name}");
+
+    .rui-btn#{$name} {
+        @if $width != default {
+            width : $width;
+        }
+
+        @if $height != default {
+            height : $height;
+        }
+
+        @if $height != default {
+            line-height : $height;
+        }
+
+        @if $padding != default {
+            padding : $padding;
+        }
+
+        @if $font-size != default {
+            font-size: $font-size;
+        }
+
+        @if $color != default {
+            color: $color;
+        }
+
+        @if $bgcolor != default {
+            background-color: $bgcolor;
+        }
+
+        &::after {
+            @if $border-width != default {
+                border-width: $border-width;
+            }
+            @if $border-color != default {
+                border-color: $border-color;
+            }
+            @if $radius != default {
+                @include responsive(retina1x) {
+                    border-radius: $radius;
+                }
+                @include responsive(retina2x) {
+                    border-radius: $radius * 2;
+                }
+                @include responsive(retina3x) {
+                    border-radius: $radius * 3;
+                }
+            }
+        }
+
+        &:active {
+            &::after {
+                @if $active-border-color != default {
+                    border-color: $active-border-color;
+                }
+            }
+            @if $active-bgcolor != default {
+                background-color: $active-bgcolor;
+            }
+            @if $active-color != default {
+                color: $active-color;
+            }
+        }
+        &.rui-btn-disabled {
+            &,
+            &:active {
+                &::after {
+                    @if $border-color != default {
+                        border-color: lighten(map-get($btn, border-color), 12%);
+                    }
+                }
+                @if $bgcolor != default {
+                    background-color: lighten(map-get($btn, bgcolor), 15%);
+                }
+                @if $color != default {
+                    color: lighten(map-get($btn, color), 40%);
+                }
+            }
+        }
+        // 增量扩展
+        @content;
+    }
+};
+.rui-btn{
+    @include _btn;
+    &-s {
+        height: map-get($btn, s-height);
+        line-height: map-get($btn, s-height);
+        font-size: map-get($btn, s-font-size);
+    }
+    &-m {
+        height: map-get($btn, m-height);
+        line-height: map-get($btn, m-height);
+        font-size: map-get($btn, m-font-size);
+    }
+    &-l {
+        height: map-get($btn, l-height);
+        line-height: map-get($btn, l-height);
+        font-size: map-get($btn, l-font-size);
+    }
+    // 通栏
+    &-stacked {
+        display: block;
+        border-radius: 0;
+        width: 100%;
+    }
+}

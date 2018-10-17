@@ -1,0 +1,250 @@
+@charset "utf-8";
+//setting
+$setting: (
+    //是否开启前缀
+    is-vendor-prefix : true,
+    vendor-prefix: -webkit-,
+    bgimg-domain: ""
+);
+// media
+$media-types: (
+    // {String} 横屏
+    landscape: "(orientation: landscape)",
+    // {String} 竖屏
+    portrait:  "(orientation: portrait)",
+    // 视网膜屏定义，这里不做非常细节的界定，比如完全一致的整数倍
+    // retina1x：< 1.5dppx；
+    // retina2x：1.5dppx ~ 2.49dppx
+    // retina3x：>= 2.5dppx
+    // {String} 非视网膜屏
+    retina1x:  "(max--moz-device-pixel-ratio: 1.49),
+                (-webkit-max-device-pixel-ratio: 1.49),
+                (max-device-pixel-ratio: 1.49),
+                (max-resolution: 143dpi),
+                (max-resolution: 1.49dppx)",
+    // {String} 视网膜屏2x
+    retina2x:  "(min--moz-device-pixel-ratio: 1.5) and (max--moz-device-pixel-ratio: 2.49),
+                (-webkit-min-device-pixel-ratio: 1.5) and (-webkit-max-device-pixel-ratio: 2.49),
+                (min-device-pixel-ratio: 1.5) and (max-device-pixel-ratio: 2.49),
+                (min-resolution: 144dpi) and (max-resolution: 239dpi),
+                (min-resolution: 1.5dppx) and (max-resolution: 2.49dppx)",
+    // {String} 视网膜屏3x
+    retina3x:  "(min--moz-device-pixel-ratio: 2.5),
+                (-webkit-min-device-pixel-ratio: 2.5),
+                (min-device-pixel-ratio: 2.5),
+                (min-resolution: 240dpi),
+                (min-resolution: 2.5dppx)",
+    // 待添加stop-points
+    // 用于常规手机横竖屏
+    xs:        "(max-width: 767px)",
+    // 用于常规pad横竖屏
+    s:         "(min-width: 768px) and (max-width: 1024px)",
+    // 用于常规笔记本
+    m:         "(min-width: 1025px) and (max-width: 1280px)",
+    // 用于常规台式机
+    l:         "(min-width: 1281px) and (max-width: 1440px)",
+    // 用于超大台式机
+    xl:        "(min-width: 1441px)"
+);
+// ico
+$ico: (
+    // 是否开启iconfont
+    is-use: true,
+    font-name: ruifont,
+    // font-path: "common/css/rui/sass/font/"
+    font-path: "../sass/font/"
+);
+// z-index
+$z-index: (
+    loading : 10001,
+    toast: 9999,
+    masker: 9999
+);
+//align
+$align: (
+    justify-content: center,
+    align-items: center
+);
+// button
+$btn: (
+    border-width: 1px,
+    border-color: #508CF0,
+    bgcolor: #508CF0,
+    color: #fff,
+    active-border-color: #407fd3,
+    active-bgcolor: #407fd3,
+    active-color: #fff,
+    padding: .1rem 0, // todo
+    radius: .04rem,
+    font-size: .16rem,
+    font-weight: null,
+    width: null,
+    height:null,
+    // samll
+    s-height: .28re,
+    s-font-size: .12rem,
+    // medium
+    m-height: .36rem,
+    m-font-size: .14rem,
+    // large
+    l-height: .44rem,
+    l-font-size: .15rem
+);
+//checked
+$checked: (
+    content: "\e60b",
+    size: .2rem,
+    font-size: .12rem,
+    border-width: null,
+    border-color: null,
+    bgcolor: null,
+    color: transparent,
+    on-border-color: null,
+    on-bgcorlor: null,
+    on-color: #4083db,
+    radius: .05rem
+);
+
+// input
+$input: (
+    width: 100%,
+    height: .44rem,
+    padding: .05rem,
+    radius : .02rem,
+    bgcolor: transparent,
+    placeholder-color: #bbb
+);
+
+// loading
+$loading: (
+    ico-size : .4rem,
+    ico-color: #212121,
+    masker-bgcolor: rgba(0, 0, 0, .1),
+    bgcolor: null,
+    radius: .05rem,
+    padding: .1rem .25rem,
+    font-size: null,
+    content: "\e909"
+);
+
+// badge
+$badge: (
+    border-width: 1px,
+    border-color: #b7b7b7,
+    color : #404040,
+    bgcolor: transparent,
+    radius: .1rem,
+    padding: 0,
+    font-size: .12rem
+);
+
+//header
+$header: (
+    bgcolor: #508CF0,
+    height: .44rem,
+    item-width: .6rem,
+    item-color: #fff,
+    item-ico-color: #fff,
+    item-ico-size: .25rem,
+    item-space: .05rem,
+    item-font-size: null,
+    color: #fff
+);
+//list
+$list: (
+    margin: 0 0 0 .15rem,
+    bgcolor: #fff,
+    border-width: null,
+    item-padding: .05rem,
+    item-border-width: 0 0 1px,
+    item-bgcolor: #fff,
+    active-bgcolor: #eee,
+    label-padding: .05rem,
+    label-font-size: .05rem,
+    has-last-border: true
+);
+//arrow
+$arrow: (
+    bgcolor: #fff,
+    border-width: 1px,
+    border-color: #ddd,
+    radius: .05rem,
+    arrow-bgcolor: #fff,
+    arrow-color: #fff,
+    arrow-bordercolor:#ddd,
+    arrow-direction: left,
+    arrow-width: null
+);
+//flex
+$flex: (
+    direction: column //row || column
+);
+//tab
+$tab: (
+    width: 100%,
+    height: .44rem,
+    line-height: .44rem,
+    padding: 0 .1rem,
+    bgcolor: #fff,
+    border-width: 0 0 1px,
+    border-color: #ebebeb,
+    radius: 0,
+    font-size: .14rem,
+    color: #8f8f8f,
+    item-border-width : 0 0 1px,
+    item-border-color: null,
+    on-bgcolor : #fff,
+    on-border-width: 0 0 4px,
+    on-border-color: #008ae0,
+    on-color: #6bace8,
+    on-font-size: .14rem
+);
+//toast
+$toast: (
+  padding: .1rem,
+  radius: .04rem,
+  bgcolor: rgba(0, 0, 0, .6),
+  color: #fff
+);
+//masker
+$masker: (
+  bgcolor: rgba(0, 8, 16, .7),
+  cont-bgcolor: null
+);
+//dialog
+$dialog: (
+  width: null,
+  height: null,
+  radius: .04rem,
+  title-color: #333,
+  title-font-size: .16rem,
+  title-line-hieght: .16rem,
+  bd-padding: .2rem .2rem .3rem,
+  bd-font-size: .15rem,
+  bd-color: #666,
+  border-color:map-get($base, border-color),
+  title-border-color: #e5e5e5,
+  title-border-width: 0 0 1px,
+);
+//popup
+$popup: (
+    // {Color} 高度
+    height:       null,
+    // {Color} 边框色
+    border-color: #999,
+    // {Color} 头部背景色
+    hd-bgcolor:   #f0f0f0,
+    // {Color} 按钮文本色
+    btn-color:    map-get($base, link-color),
+    // {Color} 背景色
+    bgcolor:      #fff
+);
+//picker
+$picker: (
+    // {Integer} 默认显示几个列表项
+    item:        5,
+    // {Length} 每个列表项的高度
+    item-height: .3rem,
+    // {Color} 边框色
+    border-color: map-get($base, border-color)
+);

@@ -1,0 +1,45 @@
+@import "../../lib/element/rui-badge";
+@include rui-badge(
+    $name : "test1",
+    $bgcolor: red,
+    $color: #fff,
+    $padding: 0.01rem .05rem
+);
+@include rui-badge(
+    $name : "test2",
+    $bgcolor: green,
+    $color: #fff,
+    $radius: 50%,
+    $font-size: .14rem,
+    $border-color: green
+);
+@include rui-badge(
+    $name : "test3",
+    $color: #404040,
+    $padding: .05rem,
+    $radius:  .03rem,
+    $font-size: .14rem,
+    $border-color: #404040
+);
+@include rui-badge(
+    $name : "test4",
+    $color: #454545,
+    $radius:  50%,
+    $border-color: #454545
+);
+@include rui-badge(
+    $name : "test5",
+    $color: #000,
+    $border-color: #ddd,
+    $bgcolor: #ddd,
+    $padding: .02rem .06rem
+);
+@include rui-badge(
+    $name : "hd",
+    $bgcolor: #fff,
+    $color: #d06e51,
+    $padding: .02rem .1rem,
+    $radius: .06rem,
+    $font-size: .14rem,
+    $border-color: #fff
+);

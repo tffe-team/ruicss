@@ -1,0 +1,28 @@
+@charset "utf-8";
+@import "../element/rui-badge";
+@import "../../lib/fragment/rui-header";
+@include rui-header(){
+    // >.next{
+    //     opacity: .5;
+    // }
+}
+@include rui-header(
+    $name:"loan",
+    $bgcolor:#4988db
+);
+@include rui-header(
+    $name:"licai",
+    $bgcolor:#cb5d3b
+);
+@include rui-header(
+    $name:"car",
+    $bgcolor:#6b72b9
+);
+@include rui-header(
+    $name:"cread",
+    $bgcolor:#6eaedb
+);
+@include rui-header(
+    $name:"house",
+    $bgcolor:#6bb99c
+);

@@ -1,0 +1,392 @@
+@charset "UTF-8";
+//前缀
+@mixin _prefix($propety, $value) {
+    @if map-get($setting, is-vendor-prefix) {
+        @each $vendor in map-get($setting, vendor-prefix) {
+            #{$vendor}#{$propety} : $value;
+        }
+    }
+    #{$propety} : $value;
+}
+// flexbox
+@mixin flexbox($flexbox: flex) {
+    @if $flexbox == inline-flex or $flexbox == inline {
+        $flexbox: "inline-";
+    } @else {
+        $flexbox : "";
+    }
+    @if map-get($setting, is-vendor-prefix) {
+        @each $vendor in map-get($setting, vendor-prefix) {
+            @if $vendor = -ms- {
+                display: #{$vendor}#{$flexbox}box;
+                display: #{$vendor}#{$flexbox}flex;
+            }
+            // @else {
+            //     display: #{$vendor}#{$flexbox}flexbox;
+            // }
+        }
+    }
+    display: #{$flexbox}flex;
+}
+//flex
+@mixin flex($flex: 1, $direction: row) {
+    @if map-get($setting, is-vendor-prefix) {
+        @each $vendor in map-get($setting, vendor-prefix) {
+            @if $vendor != -ms- {
+                #{$vendor}box-flex: $flex;
+                #{$vendor}flex: $flex;
+            } @else {
+                #{$vendor}flex: $flex;
+            }
+        }
+    }
+    flex: $flex;
+    @if $direction == row {
+        width: .1px;
+    }
+}
+//flex-direction
+@mixin flex-direction($flex-direction: row) {
+    @if $flex-direction == row {
+        @if map-get($setting, is-vendor-prefix) {
+            @each $vendor in map-get($setting, vendor-prefix) {
+                @if $vendor != -ms- {
+                    #{$vendor}box-orient: horizontal;
+                    #{$vendor}box-direction: normal;
+                }
+            }
+        }
+    } @else if $flex-direction == column {
+        @if map-get($setting, is-vendor-prefix) {
+            @each $vendor in map-get($setting, vendor-prefix) {
+                @if $vendor != -ms- {
+                    #{$vendor}box-orient: vertical;
+                    #{$vendor}box-direction: normal;
+                }
+            }
+        }
+    } @else if $flex-direction == row-reverse {
+        @if map-get($setting, is-vendor-prefix) {
+            @each $vendor in map-get($setting, vendor-prefix) {
+                @if $vendor != -ms- {
+                    #{$vendor}box-orient: horizontal;
+                    #{$vendor}box-direction: reverse;
+                }
+            }
+        }
+    } @else if $flex-direction == column-reverse {
+        @if map-get($setting, is-vendor-prefix) {
+            @each $vendor in map-get($setting, vendor-prefix) {
+                @if $vendor != -ms- {
+                    #{$vendor}box-orient: vertical;
+                    #{$vendor}box-direction: reverse;
+                }
+            }
+        }
+    }
+    @if map-get($setting, is-vendor-prefix) {
+        @each $vendor in map-get($setting, vendor-prefix) {
+            #{$vendor}flex-direction: $flex-direction;
+        }
+    }
+    flex-direction: $flex-direction;
+}
+//justify-content
+@mixin justify-content($justify-content: center) {
+    $box-pack : if($justify-content == flex-start, "start",  $justify-content);
+    $box-pack : if($justify-content == flex-end, "end",  $justify-content);
+    $box-pack : if($justify-content == center, "center",  $justify-content);
+    $box-pack : if($justify-content == space-between, "justify",  $justify-content);
+    $box-pack : if($justify-content == space-around, "center",  $justify-content);
+    @if map-get($setting, is-vendor-prefix) {
+        @each $vendor in map-get($setting, vendor-prefix) {
+            @if $vendor = -ms- {
+                #{$vendor}box-pack : $box-pack;
+                #{$vendor}justify-content : $justify-content;
+            }
+        }
+    }
+   justify-content : $justify-content;
+}
+
+//align-items
+@mixin align-items($align-items: center) {
+    // 老式浏览器（实验性质支持3个阶段草案）
+    @if $align-items == flex-start {
+        @if map-get($setting, is-vendor-prefix) {
+            @each $vendor in map-get($setting, vendor-prefix) {
+                @if $vendor != -ms- {
+                    // 当厂商前缀不为`-ms-`时输出原始和最新草案厂商前缀版
+                    #{$vendor}box-align: start;
+                    #{$vendor}align-items: $align-items;
+                } @else {
+                    // 当厂商前缀为`-ms-`时输出过渡草案厂商前缀版
+                    #{$vendor}flex-align: start;
+                }
+            }
+        }
+    } @else if $align-items == flex-end {
+        @if map-get($setting, is-vendor-prefix) {
+            @each $vendor in map-get($setting, vendor-prefix) {
+                @if $vendor != -ms- {
+                    // 当厂商前缀不为`-ms-`时输出原始和最新草案厂商前缀版
+                    #{$vendor}box-align: end;
+                    #{$vendor}align-items: $align-items;
+                } @else {
+                    // 当厂商前缀为`-ms-`时输出过渡草案厂商前缀版
+                    #{$vendor}flex-align: end;
+                }
+            }
+        }
+    } @else {
+        // 取值为center | baseline | stretch时，3个阶段草案均相同
+        @if map-get($setting, is-vendor-prefix) {
+            @each $vendor in map-get($setting, vendor-prefix) {
+                @if $vendor != -ms- {
+                    // 当厂商前缀不为`-ms-`时输出原始和最新草案厂商前缀版
+                    #{$vendor}box-align: $align-items;
+                    #{$vendor}align-items: $align-items;
+                } @else {
+                    // 当厂商前缀为`-ms-`时输出过渡草案厂商前缀版
+                    #{$vendor}flex-align: $align-items;
+                }
+            }
+        }
+    }
+    // 现代浏览器（支持最新草案）
+    align-items: $align-items;
+}
+
+@mixin align-self($align-self: center) {
+  @if $align-self == flex-start {
+    @if map-get($setting, is-vendor-prefix) {
+          @each $vendor in map-get($setting, vendor-prefix) {
+              @if $vendor != -ms- {
+                  // 当厂商前缀不为`-ms-`时输最新草案厂商前缀版（原始草案没有类似属性）
+                  #{$vendor}align-self: $align-self;
+              } @else {
+                  // 当厂商前缀为`-ms-`时输出过渡草案厂商前缀版
+                  #{$vendor}flex-item-align: start;
+              }
+          }
+      }
+  }@else if $align-self == flex-end {
+    @each $vendor in map-get($setting, vendor-prefix) {
+        @if $vendor != -ms- {
+            // 当厂商前缀不为`-ms-`时输最新草案厂商前缀版（原始草案没有类似属性）
+            #{$vendor}align-self: $align-self;
+        } @else {
+            // 当厂商前缀为`-ms-`时输出过渡草案厂商前缀版
+            #{$vendor}flex-item-align: end;
+        }
+    }
+  }@else if $align-self == auto or  $align-self == center or $align-self == baseline or $align-self == stretch {
+    @if map-get($setting, is-vendor-prefix) {
+          @each $vendor in map-get($setting, vendor-prefix) {
+              @if $vendor != -ms- {
+                  // 当厂商前缀不为`-ms-`时输最新草案厂商前缀版（原始草案没有类似属性）
+                  #{$vendor}align-self: $align-self;
+              } @else {
+                  // 当厂商前缀为`-ms-`时输出过渡草案厂商前缀版
+                  #{$vendor}flex-item-align: $align-self;
+              }
+          }
+      }
+  }
+  align-self: $align-self;
+}
+// wrap
+@mixin wrap($is-wrap: true) {
+    @if $is-wrap == true {
+        word-wrap: break-word;
+        word-break: break-all;
+    } @else {
+        white-space: nowrap;
+    }
+}
+//ellipsis
+@mixin ellipsis($width: null) {
+    overflow: hidden;
+    @include wrap(false);
+    text-overflow: ellipsis;
+    width: $width;
+}
+
+// full-screen
+@mixin full-screen($z-index: null, $position : absolute) {
+    position: $position;
+    z-index: $z-index;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+// rui-font
+@mixin ruifont() {
+    @font-face {
+        font-family: map-get($ico, font-name);
+        src:
+            // 现代浏览器
+            url("#{map-get($ico,font-path)}#{map-get($ico,font-name)}.woff") format("woff"),
+            // Android2.2+
+            url("#{map-get($ico,font-path)}#{map-get($ico,font-name)}.ttf") format("truetype");
+    }
+    .rui-ico{
+        font-family: map-get($ico, font-name);
+        font-style:  normal;
+        -webkit-font-smoothing: antialiased;
+        // PC端chrome有锯齿问题，Mobile不需要
+        // -webkit-text-stroke-width: .1px;
+        -moz-osx-font-smoothing: grayscale;
+        vertical-align: top;
+    }
+}
+//root-scroll
+@mixin root-scroll($is-scroll : false) {
+    html, body {
+        @if $is-scroll {
+            overflow: visible;
+            height: auto;
+        } @else {
+            overflow: hidden;
+            height: 100%;
+        }
+    }
+}
+// 适配
+@mixin responsive($media) {
+    @if not map-has-key($media-types, $media) {
+        @warn "#{$media} is not a known media type. Using portrait instead.";
+        $media: portrait;
+    }
+    @media #{map-get($media-types, $media)} {
+        @content;
+    }
+}
+// transform
+@mixin transform($transform...) {
+    @include _prefix(transform, $transform);
+}
+
+//transform-origin
+@mixin transform-origin($transform-origin) {
+    @include _prefix(transform-origin, $transform-origin);
+}
+
+//animation
+
+@mixin animation($animation) {
+    @include _prefix(animation, $animation);
+}
+//square
+@mixin square($size) {
+    width: $size;
+    height: $size;
+}
+
+// align
+@mixin align($flexbox: flex, $type: text, $justify-content: center, $align-items: center) {
+    @include flexbox($flexbox);
+    @include justify-content($justify-content);
+    @include align-items($align-items);
+    @include wrap;
+    > .item {
+        @if $type == image {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+}
+
+/* border */
+@mixin border($border-width: 1px, $border-color: map-get($base, border-color), $border-style: solid, $radius: null) {
+    // 为边框位置提供定位参考
+    position: relative;
+    @if $border-width == null {
+        $border-width: 0;
+    }
+    border-radius: $radius;
+    &::after {
+        // 用以解决边框layer遮盖内容
+        pointer-events: none;
+        position: absolute;
+        z-index: 999;
+        top: 0;
+        left: 0;
+        // fix当元素宽度出现小数时，边框可能显示不全的问题
+        // overflow: hidden;
+        content: "\0020";
+        border-color: $border-color;
+        border-style: $border-style;
+        border-width: $border-width;
+        // 适配dpr进行缩放
+        @include responsive(retina1x) {
+            width: 100%;
+            height: 100%;
+            @if $radius != null {
+                border-radius: $radius;
+            }
+        }
+        @include responsive(retina2x) {
+            width: 200%;
+            height: 200%;
+            @include transform(scale(.5));
+            @if $radius != null {
+                border-radius: $radius * 2;
+            }
+        }
+        @include responsive(retina3x) {
+            width: 300%;
+            height: 300%;
+            @include transform(scale(.33333));
+            @if $radius != null {
+                border-radius: $radius * 3;
+            }
+        }
+        @include transform-origin(0 0);
+    }
+}
+/* overflow */
+@mixin overflow( $overflow: auto) {
+    @if $overflow == auto {
+        overflow: auto;
+    } @else {
+        overflow:  $overflow;
+    }
+}
+
+//arrow
+@mixin arrow($direction : left, $border-color: map-get($base, border-color), $border-width: 1px){
+    width:0;
+    height:0;
+    @if $direction == left {
+        border-top: $border-width solid transparent;
+        border-bottom:$border-width solid transparent;
+        border-right:$border-width solid $border-color;
+    }
+    @if $direction == right {
+        border-top: $border-width solid transparent;
+        border-bottom:$border-width solid transparent;
+        border-left:$border-width solid $border-color;
+    }
+    @if $direction == top {
+        border-top: $border-width solid transparent;
+        border-bottom:$border-width solid $border-color;
+        border-left:$border-width solid transparent;
+    }
+    @if $direction == bottom {
+        border-top: $border-width solid $border-color;
+        border-bottom:$border-width solid transparent;
+        border-left:$border-width solid transparent;
+    }
+}
+//fullscreen
+@mixin fullscreen($z-index: null, $position: absolute) {
+    position: $position;
+    z-index: $z-index;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}

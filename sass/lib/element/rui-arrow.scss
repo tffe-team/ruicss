@@ -1,0 +1,27 @@
+// @charset "utf-8";
+// @import "../core/reset";
+//todo
+@mixin _arrow{
+    border: 1px solid map-get($arrow, border-width);
+    border-radius: map-get($arrow, radius);
+    background-color: map-get($arrow, bgcolor);
+    font-size: map-get($base, font-size);
+    color:  map-get($base, color);
+    position: relative;
+    >.arrow{
+        position: absolute;
+        // background-color: map-get($arrow, arrow-bgcolor);
+        // border-color: map-get($arrow, arrow-bgcolor);
+        // @include arrow(
+        //     $arrow-direction: map-get($arrow, arrow-direction),
+        //     $border-color: map-get($arrow, arrow-direction),
+        // );
+    }
+
+};
+@mixin rui-arrow(){
+
+};
+.rui-arrow{
+    @include _arrow;
+}

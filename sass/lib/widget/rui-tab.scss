@@ -1,0 +1,141 @@
+@charset "utf-8";
+@mixin _tab{
+    @include flexbox;
+    @include border(
+        $border-width: map-get($tab, border-width),
+        $border-color: map-get($tab, border-color),
+        $radius: map-get($tab, radius)
+    );
+    width: map-get($tab, width);
+    height: map-get($tab, height);
+    background-color: map-get($tab, bgcolor);
+    font-size: map-get($tab, font-size);
+    text-align: center;
+    line-height: map-get($tab, height);
+    padding: map-get($tab, padding);
+    color: map-get($base, color);
+    // overflow: hidden;
+    >.item{
+        @include flex;
+        display: block;
+        @include border(
+            $border-width: map-get($tab, item-border-width),
+            $border-color: map-get($tab, item-border-color)
+        );
+        &.item-on {
+            background-color: map-get($tab, on-bgcolor);
+            font-size:  map-get($tab, on-font-size);
+            color:  map-get($tab, on-color);
+            @include border(
+                $border-width: map-get($tab, on-border-width),
+                $border-color: map-get($tab, on-border-color)
+            );
+        }
+    }
+}
+@mixin rui-tab(
+    $name : default,
+    $width: default,
+    $height: default,
+    $border-width: default,
+    $border-color: default,
+    $color: default,
+    $font-size: default,
+    $radius: default,
+    $bgcolor: default,
+    $padding: default,
+    $item-border-width: default,
+    $item-border-color: default,
+    $on-border-color: default,
+    $on-border-width: default,
+    $on-bgcolor: default,
+    $on-font-size: default,
+    $on-color: default
+){
+    $name : if($name == default, "" , "-#{$name}");
+    .rui-tab#{$name} {
+        @if $width != default {
+            width: $width;
+        }
+        @if $height != default {
+            height: $height;
+        }
+        @if $color != default {
+            color: $color;
+        }
+        @if $font-size != default {
+            font-size: $font-size;
+        }
+        @if $bgcolor != default {
+            background-color: $bgcolor;
+        }
+        @if $padding != default {
+            padding: $padding;
+        }
+        @if $border-width != default {
+            $border-width: $border-width;
+        } @else {
+            $border-width: map-get($tab, border-width);
+        }
+        @if $border-color != default {
+            $border-color: $border-color;
+        } @else {
+            $border-color: map-get($tab, border-color);
+        }
+        @if $radius != default {
+            $radius: $radius;
+        } @else {
+            $radius: map-get($tab, radius);
+        }
+        @include border(
+            $border-width: $border-width,
+            $border-color: $border-color,
+            $radius: $radius
+        );
+        >.item{
+            @if $item-border-width != default {
+                $item-border-width: $item-border-width;
+            } @else {
+                $item-border-width: map-get($tab, item-border-width);
+            }
+            @if $item-border-color != default {
+                $item-border-color: $item-border-color;
+            } @else {
+                $item-border-color: map-get($tab, item-border-color);
+            }
+            @include border(
+                $border-width: $item-border-width,
+                $border-color: $item-border-color
+            );
+            &.item-on{
+                @if $on-bgcolor != default {
+                    background-color: $on-bgcolor;
+                }
+                @if $on-font-size != default {
+                    font-size: $on-font-size;
+                }
+                @if $on-color != default {
+                    color:  $on-color;
+                }
+                @if $on-border-width != default {
+                    $on-border-width: $on-border-width;
+                } @else {
+                    $on-border-width: map-get($tab, on-border-width);
+                }
+                @if $on-border-color != default {
+                    $on-border-color: $on-border-color;
+                } @else {
+                    $on-border-color: map-get($tab, on-border-color);
+                }
+                @include border(
+                    $border-width: $on-border-width,
+                    $border-color:  $on-border-color
+                );
+            }
+        }
+        @content;
+    }
+}
+.rui-tab{
+    @include _tab;
+}

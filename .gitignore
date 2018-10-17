@@ -1,0 +1,7 @@
+.git
+node_modules
+*.swp
+*.swo
+*.zip
+*.tar.zip
+npm-debug.log

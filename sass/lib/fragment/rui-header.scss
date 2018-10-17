@@ -1,0 +1,100 @@
+@charset "utf-8";
+@mixin _header{
+    width: 100%;
+    height: map-get($header, height);
+    line-height: map-get($header, height);
+    font-size: map-get($base, font-size);
+    color: map-get($header, color);
+    background-color: map-get($header, bgcolor);
+    position: relative;
+    text-align: center;
+    @include ellipsis;
+    >.title{
+        margin: 0 map-get($header, item-width);
+        @include ellipsis;
+        //文字益处以省略号处理
+    }
+    >.back, >.next{
+        position: absolute;
+        top: 0;
+        font-size: map-get($header, item-font-size);
+        color: map-get($header, item-color);
+        &:active{
+            opacity: .5;
+        }
+        >.rui-ico{
+            font-size: map-get($header, item-ico-size);
+            color: map-get($header, item-ico-color);
+        }
+    }
+    >.back{
+        left: 0;
+        text-align: left;
+        padding-left: map-get($header, item-space);
+    }
+    .next{
+        right: 0;
+        text-align: right;
+        padding-right: map-get($header, item-space);
+    }
+}
+@mixin rui-header(
+    $name: default,
+    $height:default,
+    $color: default,
+    $bgcolor: default,
+    $font-size: default,
+    $item-width: default,
+    $item-font-size: default,
+    $item-ico-size: default,
+    $item-ico-color: default,
+    $item-space: default,
+    $item-color: default
+    ){
+    $name: if($name == default, "", "-#{$name}");
+   .rui-header#{$name} {
+        @if $height != default {
+           height : $height
+        }
+        @if $color != default {
+            color: $color;
+        }
+        @if $bgcolor != default {
+            background-color: $bgcolor;
+        }
+        @if $font-size != default {
+            font-size: $font-size;
+        }
+        @if $item-width != map-get($header, item-width) {
+            margin: 0 $item-width;
+        }
+        >.back, >.next {
+            @if $item-font-size != default {
+                font-size: $item-font-size;
+            }
+            @if $item-color != default {
+                color: $item-color;
+            }
+            >.rui-ico{
+                @if $item-ico-size != default {
+                    font-size: $item-ico-size;
+                }
+                @if $item-ico-color != default {
+                    color: $item-ico-color;
+                }
+            }
+        }
+        @if $item-space != default {
+            >.back {
+                padding-left: $item-space;
+            }
+            >.next {
+                padding-right: $item-space;
+            }
+        }
+        @content;
+   }
+}
+.rui-header{
+    @include _header;
+}

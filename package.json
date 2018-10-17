@@ -1,6 +1,6 @@
 {
   "name": "ruicss",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "fe framework for rong360 fe team",
   "main": "./sass/index.scss",
   "scripts": {

@@ -1,6 +1,6 @@
 {
-  "name": "rong-css",
-  "version": "1.0.0",
+  "name": "ruicss",
+  "version": "1.0.1",
   "description": "fe framework for rong360 fe team",
   "main": "server.js",
   "scripts": {

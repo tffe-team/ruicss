@@ -1,7 +1,7 @@
 {
   "name": "ruicss",
-  "version": "1.1.4",
-  "description": "fe framework for rong360 fe team",
+  "version": "1.1.5",
+  "description": "fe framework for tf fe team",
   "main": "./sass/index.scss",
   "scripts": {
     "start": "DEBUG=express:* node server.js",

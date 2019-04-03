@@ -5,7 +5,8 @@
 var fs = require('fs')
 var path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 process.env.NODE_ENV = 'production'
 
@@ -14,8 +15,9 @@ function resolve(dir) {
 }
 
 module.exports = {
+    mode: process.env.NODE_ENV,
     entry: {
-      entry : './views/index.js',
+      'app' : './views/index.js',
     },
     output: {
         path: path.join(__dirname, '../','min'),
@@ -23,29 +25,35 @@ module.exports = {
         chunkFilename: '[id].[chunkhash].js',
         publicPath: '',
     },
+    resolve: {
+        extensions: ['.js', '.scss',],
+        alias: {
+          '@': resolve('sass'),
+          'lib': resolve('sass/lib'),
+          'usage': resolve('sass/usage')
+        }
+    },
     module: {
         rules: [
-          {
-              test: /\.css$/,
-              use: ExtractTextPlugin.extract({
-                  fallback: "style-loader",
-                  use: "css-loader"
-              })
-          },
-          {
-              test: /\.scss$/,
-              use: ExtractTextPlugin.extract({
-                  fallback: 'style-loader',
-                  use: ['css-loader', 'sass-loader']
-              })
-          },
+           {
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                        }
+                    },
+                  'css-loader',
+                  'sass-loader',
+                ],
+           },
           {
               test: /\.(png|jpg|gif)?$/,
-              loaders: ['url?limit=8192&name=[name]_[sha512:hash:base64:7].[ext]'],
+              loaders: ['url-loader?limit=8192&name=[name]_[sha512:hash:base64:7].[ext]'],
           },
           {
               test: /\.(eot|woff|ttf|svg)$/,
-              loader: 'file?limit=81920&name=[name]_[sha512:hash:base64:7].[ext]'
+              loader: 'url-loader?limit=81920&name=[name]_[sha512:hash:base64:7].[ext]'
           },
           {
               test: /\.js$/,
@@ -67,10 +75,12 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"production"'
         }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {warnings: false}
-            ,sourceMap: false
-        }),
-        new ExtractTextPlugin('[name].[contenthash:20].css')
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash].css',
+            allChunks: true,
+         }),
+        new OptimizeCSSPlugin({
+            cssProcessorOptions:{ safe: true, map: { inline: false } }
+        })
     ]
 };

@@ -1,5 +1,5 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const webpack = require('webpack');
 
 function resolve(dir) {
@@ -7,8 +7,11 @@ function resolve(dir) {
 }
 
 module.exports = {
+    mode: 'development',
     devtool: '#cheap-module-eval-source-map',
-    entry : './views/index.js',
+    entry : {
+        app: './views/index.js'
+    },
     output: {
         path : path.resolve(__dirname, "assets"),
         publicPath : "/assets/",
@@ -20,25 +23,25 @@ module.exports = {
         '@': resolve('sass'),
         'lib': resolve('sass/lib'),
         'usage': resolve('sass/usage')
-        // 'fonts': resolve('sass/font')
       }
     },
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: "css-loader"
-                })
-            },
-            {
-                test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader', 'sass-loader']
-                })
-            },
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                          // you can specify a publicPath here
+                          // by default it use publicPath in webpackOptions.output
+                          publicPath: '/'
+                        }
+                    },
+                  'css-loader',
+                  'sass-loader',
+                ],
+           },
             {
                 test: /\.(png|jpg|gif)?$/,
                 loaders: ['url-loader?limit=8192&name=[name]_[sha512:hash:base64:7].[ext]']
@@ -58,7 +61,10 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"development"'
         }),
-        new ExtractTextPlugin('app.css'),
+        new MiniCssExtractPlugin({
+            filename: "[name].css",
+            chunkFilename: "[id].css"
+        }),
         new webpack.HotModuleReplacementPlugin()
     ]
 }

@@ -13,9 +13,9 @@ rui为css前端框架 目前仅用于自己项目组，使用sass作为语法糖
 |-font 为字体文件  
 
 
-> 如何查看  
+> 文档地址  
 
-点开demo里面的index.html 就能查看现在支持的css组件
+https://tffe-team.github.io/#/ruicss/docs/overview
 
 > start
 ```

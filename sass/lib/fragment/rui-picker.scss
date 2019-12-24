@@ -80,7 +80,7 @@
  * @param {Length} $item-height 子项高度 <3.0.0>
  * @param {Color} $border-color 边框色 <3.0.0>
  */
-
+$prefix: map-get($base, prefix);
 @mixin rui-picker(
     $name: default,
     $item: default,
@@ -98,7 +98,7 @@
     @if $border-color == default {
         $border-color: map-get($picker, border-color);
     }
-    .rui-picker#{$name} {
+    .#{$prefix}-picker#{$name} {
         @if $item-height != map-get($picker, item-height) or $item != map-get($picker, item) {
             height: $item-height * $item;
         }
@@ -133,6 +133,6 @@
 }
 
 // 调用本文件时载入picker基础构造
-.rui-picker {
+.#{$prefix}-picker {
     @include _picker;
 }

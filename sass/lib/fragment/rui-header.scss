@@ -38,6 +38,7 @@
         padding-right: map-get($header, item-space);
     }
 }
+$prefix: map-get($base, prefix);
 @mixin rui-header(
     $name: default,
     $height:default,
@@ -52,7 +53,7 @@
     $item-color: default
     ){
     $name: if($name == default, "", "-#{$name}");
-   .rui-header#{$name} {
+   .#{$prefix}-header#{$name} {
         @if $height != default {
            height : $height
         }
@@ -95,6 +96,6 @@
         @content;
    }
 }
-.rui-header{
+.#{$prefix}-header{
     @include _header;
 }

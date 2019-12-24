@@ -12,6 +12,7 @@
     border-radius: map-get($badge, radius);
     @include align($flexbox: inline-flex);
 }
+$prefix: map-get($base, prefix);
 @mixin rui-badge(
     $name: default,
     $border-width: default,
@@ -23,7 +24,7 @@
     $font-size: default
     ) {
     $name : if($name == default, "" , "-#{$name}");
-    .rui-badge#{$name} {
+    .#{$prefix}-badge#{$name} {
         @if $padding != default {
             padding: $padding;
         }
@@ -57,6 +58,6 @@
         @content;
     }
 }
-.rui-badge{
+.#{$prefix}-badge{
     @include _badge;
 }

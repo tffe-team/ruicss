@@ -17,12 +17,11 @@ function resolve(dir) {
 module.exports = {
     mode: process.env.NODE_ENV,
     entry: {
-      'app' : './views/index.js',
+      'ruicss' : './views/index.js',
     },
     output: {
         path: path.join(__dirname, '../','min'),
-        filename: '[name].[chunkhash].js',
-        chunkFilename: '[id].[chunkhash].js',
+        filename: '[name].min.js',
         publicPath: '',
     },
     resolve: {
@@ -76,7 +75,7 @@ module.exports = {
             'process.env.NODE_ENV': '"production"'
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].[contenthash].css',
+            filename: 'ruicss.min.css',
             allChunks: true,
          }),
         new OptimizeCSSPlugin({

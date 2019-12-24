@@ -15,6 +15,7 @@
         color: map-get($input, placeholder-color);
     }
 }
+$prefix: map-get($base, prefix);
 @mixin rui-input(
     $name : default,
     $border-color : default,
@@ -28,7 +29,7 @@
     $color: default,
     $placeholder-color: default) {
     $name: if($name == default, "", "-#{$name}");
-    .rui-input#{$name} {
+    .#{$prefix}-input#{$name} {
         @if $border-color != default {
             border:1px solid $border-color;
         }
@@ -71,6 +72,6 @@
         @content;
     }
 }
-.rui-input{
+.#{$prefix}-input{
     @include _input;
 }

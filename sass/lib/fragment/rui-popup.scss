@@ -21,7 +21,7 @@
     }
 }
 
-
+$prefix: map-get($base, prefix);
 @mixin rui-popup(
     $name: default,
     $height: default,
@@ -36,7 +36,7 @@
         $bgcolor: map-get($popup, bgcolor);
     }
 
-    .rui-popup#{$name} {
+    .#{$prefix}-popup#{$name} {
         @if $height != map-get($popup, height) {
             height: $height;
         }
@@ -50,6 +50,6 @@
 }
 
 // 调用本文件时载入popup基础构造
-.rui-popup {
+.#{$prefix}-popup {
     @include _popup;
 }

@@ -42,6 +42,7 @@
     }
 };
 
+$prefix: map-get($base, prefix);
 @mixin rui-list(
     $name : default,
     $bgcolor :  default,
@@ -61,7 +62,7 @@
     $has-last-border : default
 ){
     $name: if($name == default, "", "-#{$name}");
-    .rui-list#{$name} {
+    .#{$prefix}-list#{$name} {
         @if $color != default {
             color: $color;
         }
@@ -131,6 +132,6 @@
         @content;
     }
 }
-.rui-list{
+.#{$prefix}-list{
     @include _list;
 }

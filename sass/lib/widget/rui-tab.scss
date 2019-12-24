@@ -33,6 +33,7 @@
         }
     }
 }
+$prefix: map-get($base, prefix);
 @mixin rui-tab(
     $name : default,
     $width: default,
@@ -53,7 +54,7 @@
     $on-color: default
 ){
     $name : if($name == default, "" , "-#{$name}");
-    .rui-tab#{$name} {
+    .#{$prefix}-tab#{$name} {
         @if $width != default {
             width: $width;
         }
@@ -136,6 +137,6 @@
         @content;
     }
 }
-.rui-tab{
+.#{$prefix}-tab{
     @include _tab;
 }

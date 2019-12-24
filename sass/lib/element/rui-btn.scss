@@ -41,6 +41,7 @@
 
     }
 };
+$prefix: map-get($base, prefix);
 // 扩展样式
 @mixin rui-btn(
     $name: default,
@@ -59,7 +60,7 @@
 
     $name: if($name == default, "", "-#{$name}");
 
-    .rui-btn#{$name} {
+    .#{$prefix}-btn#{$name} {
         @if $width != default {
             width : $width;
         }
@@ -141,7 +142,7 @@
         @content;
     }
 };
-.rui-btn{
+.#{$prefix}-btn{
     @include _btn;
     &-s {
         height: map-get($btn, s-height);

@@ -50,6 +50,7 @@
         background-color: map-get($masker, cont-bgcolor);
     }
 }
+$prefix: map-get($base, prefix);
 @mixin rui-masker(
     $name: default,
     $bgcolor: default,
@@ -63,7 +64,7 @@
     @if $cont-bgcolor == default {
         $cont-bgcolor: map-get($masker, cont-bgcolor);
     }
-    .rui-masker#{$name} {
+    .#{$prefix}-masker#{$name} {
         @if $bgcolor != map-get($masker, bgcolor) {
             background-color: $bgcolor;
         }
@@ -77,6 +78,6 @@
     }
 }
 
-.rui-masker {
+.#{$prefix}-masker {
     @include _masker;
 }

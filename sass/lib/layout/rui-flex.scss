@@ -10,12 +10,13 @@
         position: relative;
     }
 }
+$prefix: map-get($base, prefix);
 @mixin rui-flex(
     $name : default,
     $direction : default
 ){
     $name : if($name == default, "" , "-#{$name}");
-    .rui-flex#{$name} {
+    .#{$prefix}-flex#{$name} {
         @if $direction != default {
             @include flex-direction($direction);
         }
@@ -25,6 +26,6 @@
     }
     @content;
 }
-.rui-flex{
+.#{$prefix}-flex{
     @include _flex;
 }

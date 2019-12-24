@@ -28,7 +28,7 @@
         }
     }
 }
-
+$prefix: map-get($base, prefix);
 @mixin rui-loading(
     $name: default,
     $ico-color: default,
@@ -41,7 +41,7 @@
     ){
         $name : if($name == default, "", "-#{$name}");
 
-        .rui-loading#{$name}{
+        .#{$prefix}-loading#{$name}{
             @if($mask-bgcolor != default) {
                 background-color : $mask-bgcolor;
             }
@@ -72,6 +72,6 @@
             @content;
         }
     }
-.rui-loading{
+.#{$prefix}-loading{
     @include _loading;
 }

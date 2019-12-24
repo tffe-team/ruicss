@@ -4,7 +4,7 @@
   "description": "fe framework for tf fe team",
   "main": "./sass/index.scss",
   "scripts": {
-    "start": "DEBUG=express:* node server.js",
+    "dev": "DEBUG=express:* node server.js",
     "build": "webpack --config ./build/webpack.pro.js"
   },
   "repository": {

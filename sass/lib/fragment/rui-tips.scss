@@ -1,20 +1,20 @@
 @charset "utf-8";
-@mixin _toast {
+@mixin _tips {
   position: fixed;
   top: 50%;
   left: 50%;
   @include transform(translate(-50%, -50%));
   min-width: 2rem;
   max-width: 72%;
-  z-index: map-get($z-index, toast);
-  padding: map-get($toast, padding);
-  border-radius: map-get($toast, radius);
-  background-color: map-get($toast, bgcolor);
-  color: map-get($toast, color);
+  z-index: map-get($z-index, tips);
+  padding: map-get($tips, padding);
+  border-radius: map-get($tips, radius);
+  background-color: map-get($tips, bgcolor);
+  color: map-get($tips, color);
   text-align: center;
 }
 
-@mixin rui-toast (
+@mixin rui-tips (
   $name: default,
   $padding: default,
   $radius: default,
@@ -24,35 +24,34 @@
     $name: if($name == default, "", "-#{$name}");
     // 如果值为default，则取config的定义
     @if $padding == default {
-        $padding: map-get($toast, padding);
+        $padding: map-get($tips, padding);
     }
     @if $radius == default {
-        $radius: map-get($toast, radius);
+        $radius: map-get($tips, radius);
     }
     @if $bgcolor == default {
-        $bgcolor: map-get($toast, bgcolor);
+        $bgcolor: map-get($tips, bgcolor);
     }
     @if $color == default {
-        $color: map-get($toast, color);
+        $color: map-get($tips, color);
     }
-    .rui-toast#{$name} {
-        @if $padding != map-get($toast, padding) {
+    .#{$prefix}-tips#{$name} {
+        @if $padding != map-get($tips, padding) {
             padding: $padding;
         }
-        @if $radius != map-get($toast, radius) {
+        @if $radius != map-get($tips, radius) {
             border-radius: $radius;
         }
-        @if $bgcolor != map-get($toast, bgcolor) {
+        @if $bgcolor != map-get($tips, bgcolor) {
             background-color: $bgcolor;
         }
-        @if $color != map-get($toast, color) {
+        @if $color != map-get($tips, color) {
             color: $color;
         }
-
         // 增量扩展
         @content;
     }
   }
-.rui-toast{
-  @include _toast;
+.#{$prefix}-tips{
+  @include _tips;
 }

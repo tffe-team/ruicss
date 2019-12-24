@@ -223,6 +223,7 @@
 }
 
 // rui-font
+$prefix: map-get($base, prefix);
 @mixin ruifont() {
     @font-face {
         font-family: map-get($ico, font-name);
@@ -232,7 +233,7 @@
             // Android2.2+
             url("#{map-get($ico,font-path)}#{map-get($ico,font-name)}.ttf") format("truetype");
     }
-    .rui-ico{
+    .#{$prefix}-ico{
         font-family: map-get($ico, font-name);
         font-style:  normal;
         -webkit-font-smoothing: antialiased;

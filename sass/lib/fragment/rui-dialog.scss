@@ -63,6 +63,7 @@
            }
     }
 }
+$prefix: map-get($base, prefix);
 @mixin rui-dialog(
     $name: default,
     $width: default,
@@ -101,7 +102,7 @@
     @if $bd-font-size == default {
         $bd-font-size: map-get($dialog, bd-font-size);
     }
-    .rui-dialog#{$name} {
+    .#{$prefix}-dialog#{$name} {
         @if $radius != map-get($dialog, radius) {
             border-radius: $radius;
         }
@@ -172,6 +173,6 @@
         @content;
     }
 }
-.rui-dialog{
+.#{$prefix}-dialog{
   @include _dialog;
 }

@@ -28,6 +28,8 @@ $ npm install ruicss --save-dev
 
 // base
 $base: (
+    // 适配：class名前缀 
+    prefix: 'rui',          
     responsive-type:        normal,
     font-size-root:         100px,
     // 适配：用于做元素随屏幕大小而变化的情况

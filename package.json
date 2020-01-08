@@ -37,5 +37,6 @@
   },
   "author": "cindy",
   "license": "ISC",
-  "preferGlobal": true
+  "preferGlobal": true,
+  "dependencies": {}
 }

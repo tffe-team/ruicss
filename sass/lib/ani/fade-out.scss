@@ -1,0 +1,52 @@
+@charset "utf-8";
+// @import "classes";
+
+/**
+ * @module fade
+ * @description 定义淡出动画
+ * @method fade-out
+ */
+ @-webkit-keyframes fade-out {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes fade-out {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@mixin _fade-out{
+    @include animation(fade-out .15s linear);
+}
+$prefix: map-get($base, prefix);
+// @mixin rui-fade-out(
+//     $name: default,
+//     $duration: default,
+//     $border-color: default,
+//     $bgcolor: default,
+//     $color: default,
+//     $active-border-color: default,
+//     $active-bgcolor: default,
+//     $active-color: default,
+//     $padding: default,
+//     $radius: default,
+//     $font-size: default,
+//     $width: default,
+//     $height: default){
+
+//     $name: if($name == default, "", "-#{$name}");
+
+//     .#{$prefix}-fade-out#{$name} {
+
+//     }
+// }
+.#{$prefix}-fade-out{
+    @include _fade-out
+}

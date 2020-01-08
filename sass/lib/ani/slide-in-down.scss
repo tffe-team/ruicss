@@ -1,0 +1,37 @@
+@charset "utf-8";
+// @import "classes";
+
+/**
+ * @module slide
+ * @description 定义从下面淡出动画
+ * @method slide-in-down
+ */
+ @-webkit-keyframes slide-in-down {
+	0% {
+			-webkit-transform: translate3d(0,-100%,0);
+			transform: translate3d(0,-100%,0);
+			visibility: visible
+	}
+
+	to {
+			-webkit-transform: translateZ(0);
+			transform: translateZ(0)
+	}
+}
+@keyframes slide-in-down {
+	0% {
+		-webkit-transform: translate3d(0,-100%,0);
+		transform: translate3d(0,-100%,0);
+		visibility: visible
+	}
+
+	to {
+		-webkit-transform: translateZ(0);
+		transform: translateZ(0)
+	}
+}
+
+$prefix: map-get($base, prefix);
+.#{$prefix}-slide-in-down{
+    @include animation(slide-in-down .5s linear);
+}
